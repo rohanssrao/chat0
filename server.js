@@ -7,19 +7,11 @@ var clientsList = [];
 var serverPort = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var serverIpAddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
-app.get('*', function(req, res, next) {
-   if (!req.secure && app.get('env') !== 'development') {
-      res.redirect('https://' + req.hostname + req.url);
-   } else {
-      next();
-   }
-});
-
 app.use(express.static(__dirname));
 
-//app.get('*', function(req, res) {
-//   res.send('oops', 404);
-//});
+app.get('*', function(req, res) {
+   res.send('oops', 404);
+});
 
 server.listen(serverPort, serverIpAddress, function() {
    console.log('Listening on ' + serverIpAddress + ', port ' + serverPort);
