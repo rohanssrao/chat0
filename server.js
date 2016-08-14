@@ -4,6 +4,8 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 var clientsList = [];
+var serverPort = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var serverIpAddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
 app.get('*', function(req, res, next) {
    if (!req.secure && app.get('env') !== 'development') {
@@ -13,14 +15,11 @@ app.get('*', function(req, res, next) {
    }
 });
 
-app.use(express.static(__dirname, { redirect: false }));
+app.use(express.static(__dirname));
 
-app.get('*', function(req, res) {
-   res.send('oops', 404);
-});
-
-var serverPort = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-var serverIpAddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+//app.get('*', function(req, res) {
+//   res.send('oops', 404);
+//});
 
 server.listen(serverPort, serverIpAddress, function() {
    console.log('Listening on ' + serverIpAddress + ', port ' + serverPort);
