@@ -13,7 +13,7 @@ app.get('*', function(req, res, next) {
    }
 });
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname), { redirect: false });
 
 app.get('*', function(req, res) {
    res.send('oops', 404);
