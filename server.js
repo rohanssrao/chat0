@@ -8,13 +8,12 @@ var clientsList = [];
 app.get('*', function(req, res, next) {
    if (!req.secure && app.get('env') !== 'development') {
       res.redirect('https://' + req.hostname + req.url);
-      next();
    } else {
       next();
    }
 });
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname, { redirect: false }));
 
 app.get('*', function(req, res) {
    res.send('oops', 404);
