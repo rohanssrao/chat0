@@ -1,6 +1,6 @@
 var arrayContains = function(array, obj) {
-   for (let i in this) {
-      if (array[i] === obj) {
+   for (let index in array) {
+      if (array[index] === obj) {
          return true;
       }
    }
@@ -118,17 +118,15 @@ $('#enterMessage').focus();
 
 $('#chatForm').submit(function() {
 
-   var scrollAtBottom;
-
    function pad(n) {
       return (n < 10) ? '0' + n : n;
    }
 
-   var time = new Date();
-   var hours = time.getHours();
-   var minutes = time.getMinutes();
-   var seconds = time.getSeconds();
-   var amPm = 'am';
+   let time = new Date();
+   let hours = time.getHours();
+   let minutes = time.getMinutes();
+   let seconds = time.getSeconds();
+   let amPm = 'am';
 
    if (hours > 12) {
       hours -= 12;
@@ -137,11 +135,11 @@ $('#chatForm').submit(function() {
       hours = 12;
    }
 
-   var todisplay = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds) + ' ' + amPm;
+   let todisplay = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds) + ' ' + amPm;
 
    if ($('#enterMessage').val() !== '') {
-      var url;
-      var text = $('#enterMessage').val();
+      let url;
+      let text = $('#enterMessage').val();
       if (text.startsWith('http://') === false && text.startsWith('https://') === false) {
          url = 'http://' + text;
       } else { url = text; }
@@ -185,6 +183,7 @@ $('#chatForm').submit(function() {
       });
 
       $('#enterMessage').val('');
+      socket.emit('typing', false);
    }
    return false;
 });
@@ -193,7 +192,7 @@ socket.on('chat message', function(data) {
    flashTitle(data.name);
 
    scrollAtBottom = ($('#chat')[0].scrollHeight - $('#chat').scrollTop() === $('#chat').outerHeight()) ? true : false;
-   $('#messages').append($('<li>').text(data.text + ' - ' + data.name + ', ' + data.time));
+   $('#messages').append($('<li>').html(data.text + ' - <span style="color: rgb(255, 99, 0)">' + data.name + '</span>, ' + data.time));
 
    scrollToMessage(scrollAtBottom);
 
@@ -204,7 +203,7 @@ socket.on('image message', function(data) {
    flashTitle(data.name);
 
    scrollAtBottom = ($('#chat')[0].scrollHeight - $('#chat').scrollTop() === $('#chat').outerHeight()) ? true : false;
-   $('#messages').append($('<li>').html('<img style=\'margin: 10px; max-width: 400px;\' src=\'' + data.url + '\' /> - ' + data.name + ', ' + data.time));
+   $('#messages').append($('<li>').html('<img style=\'margin: 10px; max-width: 400px;\' src=\'' + data.url + '\' /> - <span style="color: rgb(255, 99, 0)">' + data.name + '</span>, ' + data.time));
 
    scrollToMessage(scrollAtBottom);
 
@@ -215,7 +214,7 @@ socket.on('youtube message', function(data) {
    flashTitle(data.name);
 
    scrollAtBottom = ($('#chat')[0].scrollHeight - $('#chat').scrollTop() === $('#chat').outerHeight()) ? true : false;
-   $('#messages').append($('<li>').html('<iframe style=\'margin: 10px;\' src=\'' + isYouTube(data.url) + '\' /> - ' + data.name + ', ' + data.time));
+   $('#messages').append($('<li>').html('<iframe style=\'margin: 10px;\' src=\'' + isYouTube(data.url) + '\' /> - <span style="color: rgb(255, 99, 0)">' + data.name + '</span>, ' + data.time));
 
    scrollToMessage(scrollAtBottom);
 

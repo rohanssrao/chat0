@@ -1,19 +1,17 @@
-var http = require('http');
-var express = require('express');
-var app = express();
-var server = http.createServer(app);
-var io = require('socket.io').listen(server);
-var clientsList = [];
-
-app.get('/', function(req, res) {
-   res.sendFile(__dirname + '/index.html');
-});
+'use strict';
+let http = require('http');
+let express = require('express');
+let app = express();
+let server = http.createServer(app);
+let io = require('socket.io').listen(server);
+let clientsList = [];
 
 app.use(express.static(__dirname));
 
 app.use(function(req, res, next) {
-   res.header('Access-Control-Allow-Origin', '*');
-   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+   if (!req.secure) {
+      return res.redirect('https://' + req.get('host') + req.url);
+   }
    next();
 });
 
@@ -21,8 +19,8 @@ app.get('*', function(req, res) {
    res.send('oops', 404);
 });
 
-var serverPort = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-var serverIpAddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+let serverPort = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+let serverIpAddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
 server.listen(serverPort, serverIpAddress, function() {
    console.log('Listening on ' + serverIpAddress + ', port ' + serverPort);
@@ -35,7 +33,7 @@ setInterval(function() {
 
 io.on('connection', function(socket) {
 
-   var name = '';
+   let name = '';
 
    socket.on('chat message', function(data) {
       console.log('message from \'' + data.name + '\' with text \'' + data.text + '\' at ' + data.time);

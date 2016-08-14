@@ -10,6 +10,7 @@
    <link href='https://fonts.googleapis.com/css?family=Roboto:700' rel='stylesheet'>
    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
    <link rel="stylesheet" href="css/styles.min.css">
+   <link rel="stylesheet" href="css/lib/snarl.min.css">
 </head>
 
 <body ng-controller="AppController as AppCtrl" ng-cloak>
@@ -31,11 +32,10 @@
 
             <div id="fixed">
                <div id="whiteBar"></div>
-               <p id="whosTyping"></p>
                <form id="chatForm">
                   <md-input-container>
                      <label style="text-align: left;">Enter message here</label>
-                     <input type="text" id="enterMessage" autocomplete="off" />
+                     <input type="text" id="enterMessage" autocomplete="off" ng-model="chatMessage" />
                   </md-input-container>
                   <md-button type="submit" id="submitMessage">Send message</md-button>
                </form>
@@ -50,8 +50,9 @@
                <ul id="online"></ul>
                <md-button ng-click="logOut()" id="logout">Log out</md-button>
             </div>
-            <div id="containerBottom" ng-show="newMessages > 0">
-               <p id="newMessages">{{newMessages}} new message<span ng-show="newMessages > 1">s</span></p>
+            <div id="containerBottom">
+               <p id="whosTyping"></p>
+               <p id="newMessages" ng-show="newMessages > 0">{{newMessages}} new message<span ng-show="newMessages > 1">s</span></p>
             </div>
 
          </div>
@@ -68,9 +69,22 @@
    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
    <script src="js/app.js"></script>
    <script src="js/app.controller.js"></script>
-   <link rel="stylesheet" href="css/snarl.min.css">
    <script src="js/lib/snarl.min.js"></script>
    <script src="https://use.fontawesome.com/1b2b6ade64.js"></script>
+   <!-- Fallback scripts -->
+   <script>
+      window.jQuery || document.write('<script src="js/lib/jquery-3.0.0.min.js"><\/script>');
+      window.io || document.write('<script src="js/lib/socket.io-1.4.5.js"><\/script>');
+      if (!window.angular) {
+         document.write('<script src="js/lib/angular.min.js"><\/script>');
+         document.write('<script src="js/lib/angular-animate.min.js"><\/script>');
+         document.write('<script src="js/lib/angular-aria.min.js"><\/script>');
+      }
+      if (!window.ngMaterial) {
+         document.write('<script src="js/lib/angular-material.min.js"><\/script>');
+         document.write('<link rel="stylesheet" href="css/lib/angular-material.min.css">')
+      }
+   </script>
 </body>
 
 </html>

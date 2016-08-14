@@ -128,17 +128,6 @@ $centerAbsolute: translate(-50%,-50%);
    @include long-shadow($type: box, $color: rgb(200, 200, 200), $length: 50, $fadeout: false, $skew: false, $direction: right);
 }
 
-#whosTyping {
-   font-family: 'Press Start 2P';
-   font-size: 16px;
-   font-size: 1rem;
-   width: 90%;
-   display: block;
-   position: fixed;
-   bottom: 38px;
-   margin-left: 50px;
-}
-
 #messages {
    list-style-type: none;
    margin: 0;
@@ -220,7 +209,8 @@ $centerAbsolute: translate(-50%,-50%);
    width: 225px;
 }
 
-#newMessages {
+#newMessages,
+#whosTyping {
    color: rgb(255, 99, 0);
 }
 
