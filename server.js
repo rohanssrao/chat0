@@ -7,6 +7,13 @@ var clientsList = [];
 
 app.use(express.static(__dirname));
 
+app.use(function(req, res, next) {
+   if (!req.secure) {
+      return res.redirect('https://' + req.get('host') + req.url);
+   }
+   next();
+});
+
 app.get('*', function(req, res) {
    res.send('oops', 404);
 });
