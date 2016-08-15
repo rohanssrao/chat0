@@ -1,51 +1,59 @@
 {
-    "name": "random",
-    "version": "1.0.0",
-    "description": "random randomness.",
-    "main": "server.js",
-    "dependencies": {
-        "express": "^4.14.0",
-        "http": "0.0.0",
-        "npm": "^3.7.5",
-        "socket.io": "^1.4.8"
-    },
-    "devDependencies": {
-        "browser-sync": "^2.14.0",
-        "gulp": "^3.9.1",
-        "gulp-livereload": "^3.8.1",
-        "gulp-nodemon": "^2.1.0",
-        "gulp-notify": "^2.2.0",
-        "gulp-sass": "^2.3.2",
-        "xo": "^0.16.0"
-    },
-    "scripts": {
-        "test": "gulp",
-        "start": "node server.js"
-    },
-    "author": "",
-    "license": "ISC",
-    "xo": {
-        "env": ["browser", "node", "jquery", "meteor", "mongo"],
-        "rules": {
-            "indent": 0,
-            "no-alert": 0,
-            "no-undef": 0,
-            "linebreak-style": 0,
-            "no-native-reassign": 0,
-            "space-before-function-paren": 0,
-            "babel/object-curly-spacing": 0,
-            "padded-blocks": 0,
-            "no-unused-vars": 0,
-            "no-useless-escape": 0,
-            "no-else-return": 0,
-            "brace-style": 0,
-            "no-unneeded-ternary": 0,
-            "no-useless-concat": 0,
-            "no-negated-condition": 0,
-            "no-path-concat": 0,
-            "import/newline-after-import": 0,
-            "import/no-amd": 0,
-            "max-lines": 0
-        }
+  "name": "random",
+  "version": "1.0.0",
+  "description": "random randomness.",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "http": "0.0.0",
+    "npm": "^3.7.5",
+    "socket.io": "^1.4.8"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.14.0",
+    "gulp": "^3.9.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.1.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-typescript": "^2.13.6",
+    "xo": "^0.16.0"
+  },
+  "scripts": {
+    "test": "gulp",
+    "start": "node server.js",
+    "tsc": "tsc -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "xo": {
+    "env": [
+      "browser",
+      "node",
+      "jquery",
+      "meteor",
+      "mongo"
+    ],
+    "rules": {
+      "indent": 0,
+      "no-alert": 0,
+      "no-undef": 0,
+      "linebreak-style": 0,
+      "no-native-reassign": 0,
+      "space-before-function-paren": 0,
+      "babel/object-curly-spacing": 0,
+      "padded-blocks": 0,
+      "no-unused-vars": 0,
+      "no-useless-escape": 0,
+      "no-else-return": 0,
+      "brace-style": 0,
+      "no-unneeded-ternary": 0,
+      "no-useless-concat": 0,
+      "no-negated-condition": 0,
+      "no-path-concat": 0,
+      "import/newline-after-import": 0,
+      "import/no-amd": 0,
+      "max-lines": 0
     }
+  }
 }
